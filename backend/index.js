@@ -8,7 +8,8 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import {Register} from './controller/Auth.js'
+import {Register} from './controller/register.js'
+import authRouter from './routes/index.js'
 // configuration
 
 const __filename = fileURLToPath(import.meta.url);
@@ -38,6 +39,8 @@ const upload =multer({storage});
 
 // Routes
 app.post('/auth/register',upload.single('picture'),Register);
+
+app.use('/auth',authRouter);
 
 const PORT=process.env.PORT || 3000;
 mongoose.connect(process.env.MONGO_URL,{

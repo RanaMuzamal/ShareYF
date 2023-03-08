@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import bodyParser from "body-parser";
 import User from "../models/User.js";
 
 // Register user
