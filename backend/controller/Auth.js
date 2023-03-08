@@ -1,16 +1,16 @@
 import bcrypt from "bcrypt";
 import bodyParser from "body-parser";
-import User from "../models/User";
+import User from "../models/User.js";
 
 // Register user
- export const register = async (req, res) => {
+ export const Register = async (req, res) => {
   try {
     const {
       firstName,
       lastName,
       email,
       password,
-      // picturePath,
+      picturePath,
       friends,
       location,
       occupation,
@@ -24,7 +24,7 @@ import User from "../models/User";
       lastName,
       email,
       password: passwordHash,
-      // picturePath,
+      picturePath,
       friends,
       location,
       occupation,
@@ -37,3 +37,4 @@ import User from "../models/User";
     res.status(500).json({error:error.message})
   }
 };
+export default Register
