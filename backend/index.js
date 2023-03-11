@@ -10,6 +10,8 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import {Register} from './controller/register.js'
 import authRouter from './routes/index.js'
+import {VerifyToken} from './middleware/auth.js'
+
 // configuration
 
 const __filename = fileURLToPath(import.meta.url);
@@ -25,6 +27,7 @@ app.use(bodyParser.urlencoded({limit:'30mb',extended:true}));
 app.use(cors());
 app.use('/assets',express.static(path.join(__dirname,'public/assets')));
 
+
 // File Storage
 const storage = multer.diskStorage({
     destination:function(req,file,cb){
@@ -38,7 +41,7 @@ const storage = multer.diskStorage({
 const upload =multer({storage});
 
 // Routes
-app.post('/auth/register',upload.single('picture'),Register);
+app.post('/auth/register',upload.single('picture'),VerifyToken,Register);
 
 app.use('/auth',authRouter);
 
