@@ -11,7 +11,7 @@ import { fileURLToPath } from 'url'
 import {Register} from './controller/register.js'
 import authRouter from './routes/index.js'
 import {VerifyToken} from './middleware/auth.js'
-
+import { createPost } from './controller/post.js'
 // configuration
 
 const __filename = fileURLToPath(import.meta.url);
@@ -42,6 +42,7 @@ const upload =multer({storage});
 
 // Routes
 app.post('/auth/register',upload.single('picture'),VerifyToken,Register);
+app.post('/post',upload.single('picture'),VerifyToken,createPost)
 
 app.use('/auth',authRouter);
 
@@ -52,5 +53,5 @@ mongoose.connect(process.env.MONGO_URL,{
 }).then(()=>{
     app.listen(PORT,()=>{console.log(`Server is running on :${PORT}`)})
 }).catch((error)=>{
-    console.log(`${error} did not connect server`)
+    console.log(`${error3} did not connect server`)
 })
